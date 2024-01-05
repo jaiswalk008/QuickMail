@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Input from "../UI/Input";
 import './User.css';
-import axios from 'axios';
+
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 const Signup = () =>{

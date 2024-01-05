@@ -24,3 +24,14 @@
         width: 400px;
     }
 }
+input{
+    background: transparent !important;
+    border: none !important;
+    border-bottom: 1px solid #000000 !important;
+    margin-top: 0;
+    font-weight: 500;
+}
+.form-control:focus ,.form-select:focus{
+    border-color: rgb(0, 0, 0) !important;
+    box-shadow: 0 0 0 0.25rem rgb(255, 255, 255) !important;
+}
