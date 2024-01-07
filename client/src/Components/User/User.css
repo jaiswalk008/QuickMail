@@ -24,7 +24,7 @@
         width: 400px;
     }
 }
-input{
+.form-container input{
     background: transparent !important;
     border: none !important;
     border-bottom: 1px solid #000000 !important;

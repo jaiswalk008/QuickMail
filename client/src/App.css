@@ -1,0 +1,7 @@
+body,html{
+    height: 100%;
+}
+.App{
+    background-color: rgb(191, 191, 191);
+    height: 100vh;
+}

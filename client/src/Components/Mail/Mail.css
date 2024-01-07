@@ -1,0 +1,76 @@
+.home-link{
+    color: white;
+    text-decoration: none;
+    font-family: 'Courier New', Courier, monospace;
+    margin-left: 10px;
+}
+#search{
+    width: 400px ;
+    margin-left: 40px !important;
+    background-color: rgb(49, 49, 49) !important;
+    border-radius: 40px;
+    border: 2px solid rgb(158, 158, 158);
+}
+.home-link:hover{
+    color: rgb(211, 208, 208);
+    text-decoration: underline;
+}
+.search-container {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .search-container input {
+    padding-right: 30px; 
+  }
+  
+  .search-container svg {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    color: white;
+  }
+  hr{
+    color: white;
+  }
+  .inbox{
+    color: rgb(195, 195, 195);
+  }
+  .sender-name{
+    font-size: 1.2rem;
+    font-weight: 500;
+
+  }
+  .mailmenu{
+    border-right: 1px solid rgb(107, 107, 107);
+  }
+  .compose{
+    margin-top: 10px;
+    line-height: 2.5rem;
+    width: 150px;
+    border-radius: 30px;
+    font-weight: 500;
+    color: rgb(68, 68, 68);
+    font-size: large;
+  }
+  .inbox-container{
+    padding-top: 10px;
+    border-radius: 10px;
+  }
+ #recipent,#subject{
+    background: transparent !important;
+    border: none !important;
+    margin-left: 5px;
+    font-weight: 500;
+    width: 90%;
+    border-bottom: 1px solid #767676 !important;
+    
+}
+ 
+#recipent:focus , #subject:focus{
+    outline: none;
+    border-bottom: 1px solid #767676 !important;
+
+}
+ 

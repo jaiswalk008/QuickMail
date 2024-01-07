@@ -5,10 +5,12 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 const server = express();
 const userRoutes = require('./routes/user');
+const emailRoutes = require('./routes/email');
 server.use(cors());    
 
 server.use(bodyParser.json());
 server.use(userRoutes);
+server.use(emailRoutes);
 const startServer =async () => {
     await mongoose.connect(process.env.MONGODB_SRV);
     server.listen(4000, () => {
