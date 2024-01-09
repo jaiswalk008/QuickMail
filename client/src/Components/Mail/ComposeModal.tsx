@@ -17,7 +17,9 @@ const ComposeModal = () => {
       EditorState.createEmpty()
     );
     const contentState = editorState.getCurrentContent();
-    const htmlContent = draftToHtml(convertToRaw(contentState));
+    const text = convertToRaw(contentState);
+ 
+    const htmlContent = draftToHtml(text);
     const onEditorStateChange = (newEditorState:any) => {
       setEditorState(newEditorState);
       // bodyRef.current.value = htmlContent;
@@ -37,9 +39,10 @@ const ComposeModal = () => {
         return;
     }
     const emailDetails = {
-        reciever:recipentRef.current.value,
+        reciever:recipentRef.current.value.trim(),
         subject:subjectRef.current.value,
-        body:htmlContent
+        bodyHTML:htmlContent,
+        bodyText:text.blocks[0].text
     }
     console.log(emailDetails);
     try {
@@ -53,7 +56,7 @@ const ComposeModal = () => {
     } catch (error) {
         console.log(error)
     }
-  },[token])
+  },[token,htmlContent])
 
   return (
     <div className="modal fade" id="composeModal" tabIndex={-1} aria-labelledby="composeModalLabel" aria-hidden="true">

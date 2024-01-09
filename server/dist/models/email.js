@@ -18,11 +18,18 @@ const emailSchema = new Schema({
     subject: {
         type: String,
     },
-    body: {
+    bodyHTML: {
+        type: String,
+    },
+    bodyText: {
         type: String,
     },
     senderId: {
         type: Schema.Types.ObjectId,
+        ref: user_1.default
+    },
+    senderName: {
+        type: String,
         ref: user_1.default
     }
 }, {

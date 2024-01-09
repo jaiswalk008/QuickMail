@@ -57,7 +57,13 @@
   }
   .inbox-container{
     /* padding-top: 10px; */
-    border-radius: 10px;
+    border-radius: 5px;
+    color: rgb(195, 192, 192);
+  }
+  .inbox-container:hover{
+    color: rgb(255, 255, 255);
+     
+    cursor: pointer;
   }
  #recipent,#subject{
     background: transparent !important;

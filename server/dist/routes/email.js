@@ -8,4 +8,5 @@ const router = (0, express_1.Router)();
 const email_1 = require("../controllers/email");
 const auth_1 = __importDefault(require("../Middleware/auth"));
 router.post('/send', auth_1.default, email_1.sendEmail);
+router.get('/inbox', auth_1.default, email_1.inbox);
 exports.default = router;
