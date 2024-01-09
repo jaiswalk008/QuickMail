@@ -36,6 +36,7 @@
   }
   .inbox{
     color: rgb(195, 195, 195);
+     
   }
   .sender-name{
     font-size: 1.2rem;
@@ -43,7 +44,7 @@
 
   }
   .mailmenu{
-    border-right: 1px solid rgb(107, 107, 107);
+    height: 100vh;
   }
   .compose{
     margin-top: 10px;
@@ -55,7 +56,7 @@
     font-size: large;
   }
   .inbox-container{
-    padding-top: 10px;
+    /* padding-top: 10px; */
     border-radius: 10px;
   }
  #recipent,#subject{
@@ -73,4 +74,28 @@
     border-bottom: 1px solid #767676 !important;
 
 }
- 
+.button-container{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 20px;
+}
+.active{
+  cursor: pointer;
+  background-color: #969292 !important;
+  color:black !important;
+}
+.button-container a:hover{
+  cursor: pointer;
+  background-color: #969292 !important;
+  color:black
+}
+.button-container a{
+  margin:5px  10px 5px  10px;
+  line-height: 2.8rem;
+  border-radius: 20px;
+  color: white;
+  text-align: center;
+  background-color: rgb(49, 49, 49);
+  text-decoration: none;
+}

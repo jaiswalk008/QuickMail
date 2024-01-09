@@ -1,0 +1,31 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const user_1 = __importDefault(require("./user"));
+const mongoose_1 = __importDefault(require("mongoose"));
+const Schema = mongoose_1.default.Schema;
+const emailSchema = new Schema({
+    sender: {
+        type: String,
+        required: true
+    },
+    reciever: {
+        type: String,
+        required: true
+    },
+    subject: {
+        type: String,
+    },
+    body: {
+        type: String,
+    },
+    senderId: {
+        type: Schema.Types.ObjectId,
+        ref: user_1.default
+    }
+}, {
+    timestamps: true
+});
+exports.default = mongoose_1.default.model('Email', emailSchema);
