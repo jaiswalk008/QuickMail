@@ -21,3 +21,13 @@ export const inbox = async (req:any,res:any) =>{
     }
 
 }
+export const markEmailAsRead = async (req:any , res:any) =>{
+    const emailId = req.params.id;
+    // console.log(emailId);
+    try{
+        await Email.findByIdAndUpdate({_id:emailId},{isRead:true})
+    }
+    catch(err){
+        console.log(err);
+    }
+}

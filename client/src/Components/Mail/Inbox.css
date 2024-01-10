@@ -6,3 +6,29 @@
     width: 450px;
     /* max-width: 100%;  */
 }
+
+.inbox-content{
+    border: 1px solid rgb(85, 85, 85);
+    height: 100%;
+    margin: 25px;
+    background-color: rgb(255, 255, 255);
+    color: white;
+    border-radius: 8px;
+     
+}
+.back-icon{
+    font-size: 2.5rem;
+    margin-left: 15px;
+}
+.back-icon:hover{
+    cursor: pointer;
+    
+}
+.message-div > h3{
+    font-family:Arial, Helvetica, sans-serif;
+    color: black;
+    text-transform: capitalize;
+}
+.message-div p {
+    color: rgb(34, 34, 34);
+}

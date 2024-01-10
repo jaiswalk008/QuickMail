@@ -31,6 +31,10 @@ const emailSchema = new Schema({
     senderName: {
         type: String,
         ref: user_1.default
+    },
+    isRead: {
+        type: Boolean,
+        default: false
     }
 }, {
     timestamps: true

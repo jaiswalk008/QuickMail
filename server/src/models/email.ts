@@ -28,6 +28,10 @@ const emailSchema = new Schema({
     senderName:{
         type:String,
         ref:User
+    },
+    isRead:{
+        type:Boolean,
+        default:false
     }
     
 }, {

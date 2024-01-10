@@ -14,7 +14,7 @@ const MailHeader = () =>{
     },[dispatch,history])
     return (
         <nav className="navbar bg-dark justify-content-around">
-        <Link className="home-link navbar-brand" to='/mail'><h2>QuickMail</h2></Link>
+        <Link className="home-link navbar-brand" to='/inbox'><h2>QuickMail</h2></Link>
    
         < div className="d-flex justify-content-end">
             <div className="search-container">
@@ -23,9 +23,10 @@ const MailHeader = () =>{
                     type="text"
                     autoComplete="off"
                     placeholder="Search"
-                    className="form-control-lg"
+                    className="form-control-lg login text-white"
                     value={searchInput}
                     onChange={searchInputHandler}
+                    
                 />
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
