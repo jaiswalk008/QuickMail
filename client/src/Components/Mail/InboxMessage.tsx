@@ -15,19 +15,21 @@ const InboxMesssage = (props:any) =>{
             <nav className='navbar bg-dark'>
                 <i onClick={() => props.onEmailClickHandler('')} 
                 className="bi back-icon bi-arrow-left-circle-fill"></i>
+                
             </nav>
             <div className='message-div p-3'>
                 <h3 className='text-center mt-2 w-100'>{email.subject}</h3>
                 <hr style={{color:'black'}}></hr>
                 <p>
                     <strong className='fs-4 m-2'>{email.senderName}</strong>
-                    <span className='fs-6'>{email.sender}</span>
+                    <span className='fs-6'>{'<'+email.sender+'>'}</span>
+                     
                 </p>
                 {/* In this example, dangerouslySetInnerHTML is an object
                  with a __html property, and the value of __html is set to the 
                  HTML content you want to render. The double underscore (__) is used to 
                  indicate that you understand the potential risks associated with rendering raw HTML.*/}
-                <div dangerouslySetInnerHTML={{ __html: sanitizedHTML }} />
+                <div className='message-body' dangerouslySetInnerHTML={{ __html: sanitizedHTML }} />
 
             </div>
         </div>

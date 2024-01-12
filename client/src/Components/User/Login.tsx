@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import { useHistory } from "react-router-dom/";
+import { Link, useHistory } from "react-router-dom/";
 import Input from "../UI/Input";
 import './User.css';
 import axios from "axios";
@@ -45,7 +45,9 @@ const Login = () => {
                    <Input id="password" value={password} label="Password" type="password" onChange={passwordChangeHandler} />
                     <button className="btn mt-2 w-100 btn-primary">Login</button>
                 </form>
+                <span>Don't have an account? <Link to="/signup"> Signup</Link></span>
             </div>
+            
         </div>
     )
 }

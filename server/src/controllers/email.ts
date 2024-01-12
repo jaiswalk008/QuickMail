@@ -26,6 +26,19 @@ export const markEmailAsRead = async (req:any , res:any) =>{
     // console.log(emailId);
     try{
         await Email.findByIdAndUpdate({_id:emailId},{isRead:true})
+        res.json({message:'Email marked as read'});
+    }
+    catch(err){
+        console.log(err);
+    }
+}
+export const deleteEmail = async(req:any,res:any) =>{
+    const emailId = req.params.id;
+    console.log(emailId);
+    try{
+        await Email.findByIdAndDelete({_id:emailId});
+        console.log('email deleted');
+        res.json({message:'Email deleted successfully'});
     }
     catch(err){
         console.log(err);

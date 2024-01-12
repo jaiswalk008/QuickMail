@@ -2,7 +2,7 @@ import { useCallback, useState } from "react";
 import Input from "../UI/Input";
 import './User.css';
 import axios from 'axios';
-import { useHistory } from "react-router-dom/";
+import { useHistory, Link } from "react-router-dom/";
 
 const Signup = () =>{
 
@@ -50,6 +50,7 @@ const Signup = () =>{
                    <Input id="confirmPassword" value={confirmPassword} label="Confirm Password" type="password" onChange={confirmPasswordChangeHandler} />
                     <button className="btn mt-2 w-100 btn-primary">Signup</button>
                 </form>
+                <span>Already have an account? <Link to="/login"> Login</Link></span>
             </div>
         </div>
     )

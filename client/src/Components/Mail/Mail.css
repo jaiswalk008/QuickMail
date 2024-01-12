@@ -62,7 +62,7 @@
   }
   .inbox-container:hover{
     color: rgb(255, 255, 255);
-     
+     border: 1px solid white;
     cursor: pointer;
   }
  #recipent,#subject{

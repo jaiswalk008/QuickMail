@@ -1,9 +1,10 @@
-body,html{
-  height: 100%;
+body,html,#root{
+  height: 100vh;
   
 
 }
 .App{
   background-color: rgb(72, 72, 72);
   /* overflow: auto; */
+    min-height: 100%;
 }

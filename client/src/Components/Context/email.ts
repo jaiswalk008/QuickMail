@@ -48,6 +48,9 @@ export const emailSlice = createSlice({
             })
             state.unreadEmails--;
             // console.log(state.unreadEmails);
+        },
+        deleteEmail(state,action){
+            state.recievedEmails = state.recievedEmails.filter((email:Email )=> email._id!==action.payload)
         }
 
     }
@@ -59,7 +62,7 @@ export const fetchRecievedEmails = (token:string)=>{
             const res =  await axios.get('http://localhost:4000/inbox',
                     {headers:{'Authorization' : token}}) ;
             console.log(res.data);
-            dispatch(emailActions.setRecievedEmails(res.data))
+            dispatch(emailActions.setRecievedEmails(res.data.reverse()))
         }
         try{
             await getRecievedEmails();

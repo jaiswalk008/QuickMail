@@ -32,3 +32,13 @@
 .message-div p {
     color: rgb(34, 34, 34);
 }
+.bi-trash{
+    padding: 5px;
+}
+.bi-trash:hover{
+    border: 1px solid white;
+    border-radius: 5px;
+    background-color: grey;
+    color: black !important;
+    
+}
