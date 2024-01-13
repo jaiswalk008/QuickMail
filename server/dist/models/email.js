@@ -25,8 +25,7 @@ const emailSchema = new Schema({
         type: String,
     },
     senderId: {
-        type: Schema.Types.ObjectId,
-        ref: user_1.default
+        type: String,
     },
     senderName: {
         type: String,
@@ -35,6 +34,9 @@ const emailSchema = new Schema({
     isRead: {
         type: Boolean,
         default: false
+    },
+    recieverName: {
+        type: String,
     }
 }, {
     timestamps: true

@@ -6,6 +6,7 @@ import {Route , Redirect ,Switch} from 'react-router-dom';
 // import Mail from './Components/Mail/Mail';
 import {useSelector} from 'react-redux';
 import InboxMesssage from './Components/Mail/InboxMessage';
+import Sent from './Components/Mail/Sent';
 function App() {
   const {token} = useSelector((state:any) => state.auth);
 
@@ -28,6 +29,11 @@ function App() {
         <Route path="/inbox" exact>
           {token.length>0 ? 
           <Suspense fallback={<div>Loading...</div>}><Mail/></Suspense>
+          : <Redirect to="/login"/>}
+        </Route>
+        <Route path="/sent" exact>
+          {token.length>0 ? 
+          <Suspense fallback={<div>Loading...</div>}><Sent/></Suspense>
           : <Redirect to="/login"/>}
         </Route>
         

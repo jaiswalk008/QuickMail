@@ -33,14 +33,14 @@ const Mail = () => {
                 <div className='w-25 h-100'><MailMenu/></div>
                {showInbox && <div className='d-flex flex-column mt-3 w-100 overflow-auto'>
                     {recievedEmails.length>0 && recievedEmails.map((element:Email) => {
-                        return <Inbox onEmailClickHandler={emailViewHandler} key={element._id} isRead={element.isRead} _id={element._id} 
+                        return <Inbox onEmailClickHandler={emailViewHandler} type="recieved" key={element._id} isRead={element.isRead} _id={element._id} 
                         senderName={element.senderName}  subject ={element.subject} 
                         bodyText={element.bodyText}/>
                     })}
 
                </div>}
                {!showInbox && <div className='w-100 overflow-hidden'>
-                    <InboxMesssage onEmailClickHandler={emailViewHandler} id={emailId}/>
+                    <InboxMesssage type="recieved" onEmailClickHandler={emailViewHandler} emails={recievedEmails} id={emailId}/>
                </div>}
             </div>
         </div>

@@ -10,5 +10,7 @@ const auth_1 = __importDefault(require("../Middleware/auth"));
 router.post('/send', auth_1.default, email_1.sendEmail);
 router.get('/inbox', auth_1.default, email_1.inbox);
 router.get('/markread/:id', email_1.markEmailAsRead);
-router.delete('/delete-email/:id', email_1.deleteEmail);
+router.get('/sentEmails', auth_1.default, email_1.getSendEmails);
+router.delete('/delete-recieved-email/:id', email_1.deleteRecievedEmail);
+router.delete('/delete-sent-email/:id', email_1.deleteSentEmail);
 exports.default = router;

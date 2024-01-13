@@ -1,17 +1,19 @@
 import { useCallback, useRef, useState } from "react";
 // import TextEditor from "./Editor";
 import axios from "axios";
-import {useSelector} from 'react-redux';
+import {useSelector , useDispatch} from 'react-redux';
 import { EditorState, convertToRaw } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import draftToHtml from 'draftjs-to-html';
+import { emailActions } from "../Context/store";
 
 const ComposeModal = () => {
   const recipentRef = useRef<any>('');
   // const [body, setBody] = useState<string>('');
   const subjectRef = useRef<any>('');
   const {token} = useSelector((state:any)=>state.auth);
+  const dispatch = useDispatch();
 
   const [editorState, setEditorState] = useState(() =>
       EditorState.createEmpty()
@@ -30,9 +32,8 @@ const ComposeModal = () => {
       setEditorState(EditorState.createEmpty());
     }
   const sendEmailHandler = useCallback(async() => {
-    console.log(recipentRef.current);
+    // console.log(recipentRef.current);
     const recipientEmail = recipentRef.current.value;
-
     if (recipientEmail && !(recipientEmail.split('').includes('@'))) {
         // Display an alert for invalid email format
         alert('Invalid email format. Please enter a valid email address.');
@@ -50,6 +51,7 @@ const ComposeModal = () => {
           headers:{'Authorization':token}
         });
         console.log(res);
+        dispatch(emailActions.addToSentEmail(res.data));
         const closeBtn= document.querySelector('.btn-close') as HTMLButtonElement;
         closeBtn.click();
         reset();

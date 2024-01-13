@@ -37,9 +37,9 @@ export const emailSlice = createSlice({
             state.sentEmails = action.payload;
         },
         addToSentEmail(state,action){
-            state.sentEmails.push(action.payload);
-        
+            state.sentEmails.unshift(action.payload);
         },
+
         markEmailAsRead(state,action){
             state.recievedEmails.forEach((email) =>{
                 if(email._id === action.payload){
@@ -50,7 +50,11 @@ export const emailSlice = createSlice({
             // console.log(state.unreadEmails);
         },
         deleteEmail(state,action){
-            state.recievedEmails = state.recievedEmails.filter((email:Email )=> email._id!==action.payload)
+
+            if(action.payload.type==='sent'){
+                state.sentEmails = state.sentEmails.filter((email:Email )=> email._id!==action.payload.id)
+            }
+            else state.recievedEmails = state.recievedEmails.filter((email:Email )=> email._id!==action.payload.id)
         }
 
     }
@@ -79,7 +83,7 @@ export const fetchSentEmails = (token:string) =>{
                 headers:{'Authorization':token}
             })
             console.log(res.data);
-            dispatch(emailActions.setSentEmails(res.data));
+            dispatch(emailActions.setSentEmails(res.data.reverse()));
         }
         try {
             await getSentEmails();
