@@ -1,7 +1,7 @@
 import { useCallback, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import axios from "axios";
-import { emailActions } from "./Components/Context/store";
+import { emailActions } from "../Context/store";
 const useFetch = (url:string, token:string , type:string) => {
     const dispatch = useDispatch();
     const fetchdata = useCallback(async () =>{

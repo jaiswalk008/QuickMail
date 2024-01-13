@@ -6,7 +6,7 @@ import { useState } from "react";
 import { Email } from "../Context/email";
 import Inbox from "./Inbox";
 import InboxMesssage from "./InboxMessage";
-import useFetch from "../../useFetch";
+import useFetch from "../Hooks/useFetch";
 const Sent = () =>{
     const {token} = useSelector((state:any) => state.auth);
     const {sentEmails} = useSelector((state:any) => state.email);

@@ -12,8 +12,8 @@ const MailMenu = () =>{
             
             {createPortal(<Compose/> , document.getElementById('modal-content') as HTMLDivElement)};
             <div className='button-container'>
-                <NavLink exact   to="/inbox">Inbox <span className='unread-emails'>{unreadEmails}</span></NavLink>
-                <NavLink  to="/sent">Sent</NavLink>
+                <NavLink to="/inbox">Inbox <span className='unread-emails'>{unreadEmails}</span></NavLink>
+                <NavLink to="/sent">Sent</NavLink>
             </div>
         </div>
     )

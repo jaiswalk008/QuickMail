@@ -10,7 +10,6 @@ import Sent from './Components/Mail/Sent';
 function App() {
   const {token} = useSelector((state:any) => state.auth);
 
-
   const Mail = lazy(( )=> import('./Components/Mail/Mail'));
 
   return (

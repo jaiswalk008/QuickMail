@@ -17,7 +17,7 @@ const DeleteButton = (props:{id:string }) =>{
         <button onClick={(e) => {
             e.stopPropagation();
             deleteHandler(props.id)}} className='btn btn-dark'><i className="bi text-white bi-trash"></i>
-            </button>
+        </button>
     )
 }
 export default DeleteButton

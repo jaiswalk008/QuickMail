@@ -11,8 +11,7 @@ export type Email = {
     senderName:string,
     senderId:string,
     isRead: boolean;
-  };
-  
+};
 
 const initialEmailState: {recievedEmails:Email [] , sentEmails:Email [] , unreadEmails:number} = {
     recievedEmails:[],

@@ -1,17 +1,25 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { Link, useHistory } from "react-router-dom/";
-import { useDispatch } from "react-redux";
-import { authActions } from "../Context/store";
+import { useDispatch, useSelector } from "react-redux";
+import { authActions, emailActions } from "../Context/store";
+import { Email } from "../Context/email";
+import useSearch from "../Hooks/useSearch";
 
 const MailHeader = () =>{
     const [searchInput , setSearchInput] = useState<string>('');
     const searchInputHandler= (e:any) => setSearchInput(e.target.value);
     const dispatch = useDispatch();
     const history = useHistory();
+    const {recievedEmails} = useSelector((state:any) => state.email);
+    //creating emailList using useMemo so that recievedEmails doesnot changes
+    const emailList = useMemo(() => recievedEmails,[]);
+    
+    useSearch(emailList , searchInput);
     const logoutHandler = useCallback(()=>{
         dispatch(authActions.logout());
         history.push('/login');
     },[dispatch,history])
+    
     return (
         <nav className="navbar bg-dark justify-content-around">
         <Link className="home-link navbar-brand" to='/inbox'><h2>QuickMail</h2></Link>
