@@ -23,7 +23,11 @@ const Mail = () => {
     }
 
     useEffect(() =>{
-        dispatch(fetchRecievedEmails(token));
+        const interval = setInterval(() => {
+            dispatch(fetchRecievedEmails(token));
+        },2000)
+        
+        return () => clearInterval(interval);
     },[dispatch,token])
     return (
         <div className='h-100'>
