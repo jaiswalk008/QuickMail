@@ -6,7 +6,7 @@ import DOMPurify from 'dompurify';
 
 const InboxMesssage = (props:any) =>{
     const email = props.emails.filter((element:Email) => element._id===props.id)[0]
-    const name = props.type==='sent'? email.recieverName: email.senderName
+    const name = props.type==='sent'? 'To:'+email.recieverName: email.senderName
     const mail = props.type==='sent'? email.reciever: email.sender;
     console.log(email.reciever)
     //sanitization example, removing <script> tags and event attributes like onload and onclick may be removed.

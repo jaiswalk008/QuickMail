@@ -2,12 +2,13 @@ import './Mail.css';
 import MailHeader from "./MailHeader";
 import Inbox from "./Inbox";
 import MailMenu from './MailMenu';
-import {  useEffect, useState } from 'react';
-import { useSelector , useDispatch } from 'react-redux';
+import {  useState } from 'react';
+import { useSelector } from 'react-redux';
 // import { emailActions } from '../Context/store';
-import { Email, fetchRecievedEmails } from '../Context/email';
+import { Email } from '../Context/email';
 import InboxMesssage from './InboxMessage';
 // import axios from 'axios';
+import useFetch from '../../useFetch';
 
 const Mail = () => {
 
@@ -15,22 +16,19 @@ const Mail = () => {
     const {recievedEmails} = useSelector((state:any) => state.email);
     const [showInbox , setShowInbox] = useState(true);
     const [emailId , setEmailId] = useState('');
-    const dispatch:any = useDispatch();
+
     
     const emailViewHandler = (id:string) =>{
         setEmailId(id);
         setShowInbox(prev => !prev);
     }
-
-    useEffect(() =>{
-        const interval = setInterval(() => {
-            dispatch(fetchRecievedEmails(token));
-        },2000)
-        
-        return () => clearInterval(interval);
-    },[dispatch,token])
+    useFetch('http://localhost:4000/inbox',token,'recieved');
+    
+    
     return (
-        <div className='h-100'>
+        
+        <>
+            
            <MailHeader/>
             
             <div className='d-flex h-100'>
@@ -47,7 +45,7 @@ const Mail = () => {
                     <InboxMesssage type="recieved" onEmailClickHandler={emailViewHandler} emails={recievedEmails} id={emailId}/>
                </div>}
             </div>
-        </div>
+        </>
     )
 }
 export default Mail;

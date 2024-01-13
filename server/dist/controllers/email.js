@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteSentEmail = exports.deleteRecievedEmail = exports.getSendEmails = exports.markEmailAsRead = exports.inbox = exports.sendEmail = void 0;
+exports.deleteEmail = exports.getSentEmails = exports.markEmailAsRead = exports.inbox = exports.sendEmail = void 0;
 const email_1 = __importDefault(require("../models/email"));
 const user_1 = __importDefault(require("../models/user"));
 const sendEmail = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -47,7 +47,7 @@ const markEmailAsRead = (req, res) => __awaiter(void 0, void 0, void 0, function
     }
 });
 exports.markEmailAsRead = markEmailAsRead;
-const getSendEmails = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const getSentEmails = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const sentEmails = yield email_1.default.find({ senderId: req.user._id });
         // console.log(sentEmails);
@@ -58,8 +58,8 @@ const getSendEmails = (req, res) => __awaiter(void 0, void 0, void 0, function* 
         console.log(err);
     }
 });
-exports.getSendEmails = getSendEmails;
-const deleteRecievedEmail = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.getSentEmails = getSentEmails;
+const deleteEmail = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const emailId = req.params.id;
     // console.log(emailId);
     try {
@@ -75,21 +75,4 @@ const deleteRecievedEmail = (req, res) => __awaiter(void 0, void 0, void 0, func
         console.log(err);
     }
 });
-exports.deleteRecievedEmail = deleteRecievedEmail;
-const deleteSentEmail = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const emailId = req.params.id;
-    // console.log(emailId);
-    try {
-        const email = yield email_1.default.findById({ _id: emailId });
-        if (email.reciever === '')
-            yield email_1.default.findByIdAndDelete({ _id: emailId });
-        else
-            yield email_1.default.findByIdAndUpdate({ _id: emailId }, { sender: "", senderId: "NA" });
-        // console.log('email deleted');
-        res.json({ message: 'Email deleted successfully' });
-    }
-    catch (err) {
-        console.log(err);
-    }
-});
-exports.deleteSentEmail = deleteSentEmail;
+exports.deleteEmail = deleteEmail;

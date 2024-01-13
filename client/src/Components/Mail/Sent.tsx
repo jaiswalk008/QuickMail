@@ -1,28 +1,24 @@
 import MailHeader from "./MailHeader"
 import './Mail.css';
 import MailMenu from "./MailMenu";
-import { useSelector , useDispatch } from 'react-redux';
-import { useState, useEffect } from "react";
-import { fetchSentEmails , fetchRecievedEmails} from "../Context/email";
+import { useSelector } from 'react-redux';
+import { useState } from "react";
 import { Email } from "../Context/email";
 import Inbox from "./Inbox";
 import InboxMesssage from "./InboxMessage";
+import useFetch from "../../useFetch";
 const Sent = () =>{
     const {token} = useSelector((state:any) => state.auth);
     const {sentEmails} = useSelector((state:any) => state.email);
     const [showInbox , setShowInbox] = useState(true);
     const [emailId , setEmailId] = useState('');
-    const dispatch:any = useDispatch();
     
     const emailViewHandler = (id:string) =>{
         setEmailId(id);
         setShowInbox(prev => !prev);
     }
-
-    useEffect(() =>{
-        dispatch(fetchSentEmails(token));
-        dispatch(fetchRecievedEmails(token));
-    },[dispatch,token])
+    useFetch('http://localhost:4000/sentEmails',token,'sent');
+   
     return (
         <div>
             <MailHeader/>

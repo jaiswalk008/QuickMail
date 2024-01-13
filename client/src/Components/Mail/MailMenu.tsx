@@ -5,7 +5,7 @@ import {createPortal} from 'react-dom';
 import { useSelector } from 'react-redux';
 const MailMenu = () =>{
     const {unreadEmails} = useSelector((state:any) => state.email);
-    console.log(unreadEmails);
+
     return (
         <div className='mailmenu'>
             <div className='text-center'><button data-bs-toggle="modal" data-bs-target="#composeModal" className="btn compose btn-light">✏️Compose</button></div>

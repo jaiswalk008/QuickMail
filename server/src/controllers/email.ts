@@ -33,7 +33,7 @@ export const markEmailAsRead = async (req:any , res:any) =>{
         console.log(err);
     }
 }
-export const getSendEmails = async (req:any , res:any) =>{
+export const getSentEmails = async (req:any , res:any) =>{
     try{
         const sentEmails = await Email.find({senderId:req.user._id});
         // console.log(sentEmails);
@@ -44,27 +44,13 @@ export const getSendEmails = async (req:any , res:any) =>{
         console.log(err)
     }
 }
-export const deleteRecievedEmail = async(req:any,res:any) =>{
+export const deleteEmail = async(req:any,res:any) =>{
     const emailId = req.params.id;
     // console.log(emailId);
     try{
         const email = await Email.findById({_id:emailId});
         if(email.sender==='') await Email.findByIdAndDelete({_id:emailId});
         else await Email.findByIdAndUpdate({_id:emailId},{reciever:""});
-        // console.log('email deleted');
-        res.json({message:'Email deleted successfully'});
-    }
-    catch(err){
-        console.log(err);
-    }
-}
-export const deleteSentEmail = async(req:any,res:any) =>{
-    const emailId = req.params.id;
-    // console.log(emailId);
-    try{
-        const email = await Email.findById({_id:emailId});
-        if(email.reciever==='') await Email.findByIdAndDelete({_id:emailId});
-        else await Email.findByIdAndUpdate({_id:emailId},{sender:"", senderId:"NA"});
         // console.log('email deleted');
         res.json({message:'Email deleted successfully'});
     }
