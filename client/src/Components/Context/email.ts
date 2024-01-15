@@ -13,10 +13,11 @@ export type Email = {
     isRead: boolean;
 };
 
-const initialEmailState: {recievedEmails:Email [] , sentEmails:Email [] , unreadEmails:number} = {
+const initialEmailState: {recievedEmails:Email [] , sentEmails:Email [] ,   unreadEmails:number , recievedEmailsClone:Email [] } = {
     recievedEmails:[],
     sentEmails:[],
     unreadEmails:0,
+    recievedEmailsClone:[],
 }
 
 export const emailSlice = createSlice({
@@ -30,11 +31,13 @@ export const emailSlice = createSlice({
             },0)
             // console.log(state.unreadEmails);
         },
+        setRecievedEmailsClone(state,action){
+            state.recievedEmailsClone = action.payload;
+            // console.log(state.recievedEmailsClone);
+        },
         setSentEmails(state,action){
             state.sentEmails = action.payload;
-            state.unreadEmails = action.payload.reduce((acc:number  , curr:{isRead:boolean}) =>{
-                return curr.isRead === false ? acc + 1 : acc;
-            },0)
+           
         },
         addToSentEmail(state,action){
             state.sentEmails.unshift(action.payload);

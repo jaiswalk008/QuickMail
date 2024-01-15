@@ -23,7 +23,7 @@ const Mail = () => {
 
     return (
         <>
-           <MailHeader/>
+           <MailHeader type= "recieved"/>
             
             <div className='d-flex h-100'>
                 <div className='w-25 h-100'><MailMenu/></div>

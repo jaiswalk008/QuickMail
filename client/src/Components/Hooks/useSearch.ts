@@ -14,6 +14,7 @@ const useSearch = (emailList : Email [] , searchInput:string) =>{
                 || element.sender.toLowerCase().includes(searchInput.toLowerCase());
                 
             })
+            console.log(searchResults);
             dispatch(emailActions.setRecievedEmails(searchResults));
             return () => {
                 clearTimeout(timer);

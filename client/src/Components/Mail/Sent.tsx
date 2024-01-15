@@ -9,7 +9,7 @@ import InboxMesssage from "./InboxMessage";
 import useFetch from "../Hooks/useFetch";
 const Sent = () =>{
     const {token} = useSelector((state:any) => state.auth);
-    const {sentEmails} = useSelector((state:any) => state.email);
+    const {sentEmails , recievedEmais} = useSelector((state:any) => state.email);
     const [showInbox , setShowInbox] = useState(true);
     const [emailId , setEmailId] = useState('');
     
@@ -18,10 +18,11 @@ const Sent = () =>{
         setShowInbox(prev => !prev);
     }
     useFetch('http://localhost:4000/sentEmails',token,'sent');
-   
+    useFetch('http://localhost:4000/inbox',token,'recieved');
+    
     return (
         <div>
-            <MailHeader/>
+            <MailHeader type="sent"/>
             <div className='d-flex h-100'>
                 <div className='w-25 h-100'><MailMenu/></div>
                {showInbox && <div className='d-flex flex-column mt-3 w-100 overflow-auto'>
