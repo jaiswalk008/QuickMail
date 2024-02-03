@@ -9,7 +9,7 @@ import InboxMesssage from "./InboxMessage";
 import useFetch from "../Hooks/useFetch";
 const Sent = () =>{
     const {token} = useSelector((state:any) => state.auth);
-    const {sentEmails , recievedEmais} = useSelector((state:any) => state.email);
+    const {sentEmails } = useSelector((state:any) => state.email);
     const [showInbox , setShowInbox] = useState(true);
     const [emailId , setEmailId] = useState('');
     
@@ -17,9 +17,9 @@ const Sent = () =>{
         setEmailId(id);
         setShowInbox(prev => !prev);
     }
-    useFetch('http://localhost:4000/sentEmails',token,'sent');
-    useFetch('http://localhost:4000/inbox',token,'recieved');
-    
+    useFetch('http://localhost:4000/mail',token);
+    console.log('sentEmails');    
+    console.log(sentEmails);
     return (
         <div>
             <MailHeader type="sent"/>
@@ -29,7 +29,7 @@ const Sent = () =>{
                     {sentEmails.length>0 && sentEmails.map((element:Email) => {
                         return <Inbox onEmailClickHandler={emailViewHandler} type="sent" key={element._id} isRead={true} _id={element._id} 
                         subject ={element.subject} 
-                        bodyText={element.bodyText}/>
+                        bodyHTML={element.bodyHtml}/>
                     })}
 
                </div>}

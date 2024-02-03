@@ -7,14 +7,6 @@ const user_1 = __importDefault(require("./user"));
 const mongoose_1 = __importDefault(require("mongoose"));
 const Schema = mongoose_1.default.Schema;
 const emailSchema = new Schema({
-    sender: {
-        type: String,
-        required: true
-    },
-    reciever: {
-        type: String,
-        required: true
-    },
     subject: {
         type: String,
     },
@@ -26,19 +18,23 @@ const emailSchema = new Schema({
     },
     senderId: {
         type: String,
+        ref: user_1.default,
     },
-    senderName: {
+    receiverId: {
         type: String,
-        ref: user_1.default
+        ref: user_1.default,
     },
     isRead: {
         type: Boolean,
         default: false
     },
-    recieverName: {
-        type: String,
+    hasReceiverDeleted: {
+        type: Boolean,
+        default: false,
+    },
+    hasSenderDeleted: {
+        type: Boolean,
+        default: false,
     }
-}, {
-    timestamps: true
 });
 exports.default = mongoose_1.default.model('Email', emailSchema);

@@ -13,6 +13,7 @@
 }
 .form-container input{
     color: white !important;
+    
 }
 .message-alert{
     background-color: rgb(224, 213, 110);
@@ -32,7 +33,7 @@
 .form-container input{
     background: transparent !important;
     border: none !important;
-    border-bottom: 1px solid #000000 !important;
+    border-bottom: 1px solid #ffffff !important;
     margin-top: 0;
     font-weight: 500;
 }

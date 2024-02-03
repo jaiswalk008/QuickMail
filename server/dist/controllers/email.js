@@ -12,34 +12,58 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteEmail = exports.getSentEmails = exports.markEmailAsRead = exports.inbox = exports.sendEmail = void 0;
-const email_1 = __importDefault(require("../models/email"));
+exports.markEmailAsRead = exports.retrieveEmails = exports.sendEmail = void 0;
+const Email_1 = __importDefault(require("../models/Email"));
 const user_1 = __importDefault(require("../models/user"));
 const sendEmail = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const reciever = yield user_1.default.findOne({ email: req.body.reciever });
-    console.log(reciever);
-    const newEmail = new email_1.default(Object.assign(Object.assign({}, req.body), { sender: req.user.email, senderId: req.user._id.toString(), senderName: req.user.name, recieverName: reciever.name }));
-    yield newEmail.save();
-    res.json(newEmail);
-});
-exports.sendEmail = sendEmail;
-const inbox = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        // console.log(req.user.email);
-        const inbox = yield email_1.default.find({ reciever: req.user.email });
-        // console.log(inbox);
-        res.json(inbox);
+        const receiver = yield user_1.default.findOne({ email: req.body.reciever });
+        if (!receiver)
+            return res.status(400).json({ message: 'No user with this email' });
+        const { subject, bodyHTML, bodyText } = req.body;
+        const newEmail = new Email_1.default({ subject, bodyHTML, bodyText,
+            senderId: req.user._id.toString(), receiverId: receiver._id.toString() });
+        yield newEmail.save();
+        res.json(newEmail);
     }
     catch (error) {
         console.log(error);
     }
 });
-exports.inbox = inbox;
+exports.sendEmail = sendEmail;
+const retrieveEmails = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        // console.log(req.user.email);
+        const receivedEmails = yield Email_1.default.find({ receiverId: req.user._id.toString() });
+        const sendersPromise = receivedEmails.map((email) => __awaiter(void 0, void 0, void 0, function* () {
+            const sender = yield user_1.default.findById({ _id: email.senderId });
+            return sender;
+        }));
+        const senders = yield Promise.all(sendersPromise);
+        console.log('senders....');
+        console.log(senders);
+        console.log('sent emails....');
+        const sentEmails = yield Email_1.default.find({ senderId: req.user._id.toString() });
+        console.log(sentEmails);
+        const receiversPromise = sentEmails.map((email) => __awaiter(void 0, void 0, void 0, function* () {
+            const receiver = yield user_1.default.findById({ _id: email.receiverId });
+            return receiver;
+        }));
+        const receivers = yield Promise.all(receiversPromise);
+        console.log('receivers....');
+        console.log(receivers);
+        res.json({ receivedEmails, sentEmails, senders, receivers });
+    }
+    catch (error) {
+        console.log(error);
+    }
+});
+exports.retrieveEmails = retrieveEmails;
 const markEmailAsRead = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const emailId = req.params.id;
     // console.log(emailId);
     try {
-        yield email_1.default.findByIdAndUpdate({ _id: emailId }, { isRead: true });
+        yield Email_1.default.findByIdAndUpdate({ _id: emailId }, { isRead: true });
         res.json({ message: 'Email marked as read' });
     }
     catch (err) {
@@ -47,32 +71,17 @@ const markEmailAsRead = (req, res) => __awaiter(void 0, void 0, void 0, function
     }
 });
 exports.markEmailAsRead = markEmailAsRead;
-const getSentEmails = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const sentEmails = yield email_1.default.find({ senderId: req.user._id });
-        // console.log(sentEmails);
-        res.json(sentEmails);
-        // console.log(req.user);
-    }
-    catch (err) {
-        console.log(err);
-    }
-});
-exports.getSentEmails = getSentEmails;
-const deleteEmail = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const emailId = req.params.id;
-    // console.log(emailId);
-    try {
-        const email = yield email_1.default.findById({ _id: emailId });
-        if (email.sender === '')
-            yield email_1.default.findByIdAndDelete({ _id: emailId });
-        else
-            yield email_1.default.findByIdAndUpdate({ _id: emailId }, { reciever: "" });
-        // console.log('email deleted');
-        res.json({ message: 'Email deleted successfully' });
-    }
-    catch (err) {
-        console.log(err);
-    }
-});
-exports.deleteEmail = deleteEmail;
+// export const deleteEmail = async(req:any,res:any) =>{
+//     const emailId = req.params.id;
+//     // console.log(emailId);
+//     try{
+//         const email = await Email.findById({_id:emailId});
+//         // if(email==='') await Email.findByIdAndDelete({_id:emailId});
+//         else await Email.findByIdAndUpdate({_id:emailId},{reciever:""});
+//         // console.log('email deleted');
+//         res.json({message:'Email deleted successfully'});
+//     }
+//     catch(err){
+//         console.log(err);
+//     }
+// }

@@ -1,11 +1,10 @@
 import { Router } from 'express';
 const router = Router();
-import { sendEmail,inbox ,markEmailAsRead,deleteEmail , getSentEmails} from '../controllers/email';
-import authentication from '../Middleware/auth';
-router.post('/send',authentication,sendEmail);
-router.get('/inbox',authentication,inbox);
-router.get('/markread/:id',markEmailAsRead);
-router.get('/sentEmails',authentication, getSentEmails)
-router.delete('/delete-email/:id',deleteEmail);
+import { sendEmail,retrieveEmails ,markEmailAsRead} from '../controllers/email';
+import authentication from '../middleware/auth';
+router.post('/mail',authentication,sendEmail);
+router.get('/mail',authentication,retrieveEmails);
+router.put('/mail/:id',markEmailAsRead);
+
 
 export default router;

@@ -4,36 +4,34 @@ export type Email = {
     _id: string;
     subject: string;
     sender: string;
-    receiver: string;
-    bodyText: string;
-    timestamp: number;
     bodyHtml:string,
     senderName:string,
     senderId:string,
     isRead: boolean;
+    receiverId:string;
 };
 
-const initialEmailState: {recievedEmails:Email [] , sentEmails:Email [] ,   unreadEmails:number , recievedEmailsClone:Email [] } = {
-    recievedEmails:[],
+const initialEmailState: {receivedEmails:Email [] , sentEmails:Email [] ,   unreadEmails:number , receivedEmailsClone:Email [] } = {
+    receivedEmails:[],
     sentEmails:[],
     unreadEmails:0,
-    recievedEmailsClone:[],
+    receivedEmailsClone:[],
 }
 
 export const emailSlice = createSlice({
     name:"email",
     initialState:initialEmailState,
     reducers:{
-        setRecievedEmails(state,action){
-            state.recievedEmails = action.payload;
+        setreceivedEmails(state,action){
+            state.receivedEmails = action.payload;
             state.unreadEmails = action.payload.reduce((acc:number  , curr:{isRead:boolean}) =>{
                 return curr.isRead === false ? acc + 1 : acc;
             },0)
             // console.log(state.unreadEmails);
         },
-        setRecievedEmailsClone(state,action){
-            state.recievedEmailsClone = action.payload;
-            // console.log(state.recievedEmailsClone);
+        setreceivedEmailsClone(state,action){
+            state.receivedEmailsClone = action.payload;
+            // console.log(state.receivedEmailsClone);
         },
         setSentEmails(state,action){
             state.sentEmails = action.payload;
@@ -44,17 +42,17 @@ export const emailSlice = createSlice({
         },
 
         markEmailAsRead(state,action){
-            state.recievedEmails.forEach((email) =>{
+            state.receivedEmails.forEach((email) =>{
                 if(email._id === action.payload){
                     email.isRead = true;
                 }
             })
             state.unreadEmails--;
-            // console.log(state.unreadEmails);
+            
         },
         deleteEmail(state,action){
 
-            state.recievedEmails = state.recievedEmails.filter((email:Email )=> email._id!==action.payload)
+            state.receivedEmails = state.receivedEmails.filter((email:Email )=> email._id!==action.payload)
         
         }
 

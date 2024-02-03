@@ -12,6 +12,7 @@ const Signup = () =>{
     const [confirmPassword,setConfirmPassword] = useState('');
     const [errorMessage , setErrorMessage] = useState('');
     const history = useHistory();
+    
     const nameChangeHandler = (event:any) => setName(event.target.value);
     const emailChangeHandler = (event:any) => setEmail(event.target.value);
     const passwordChangeHandler = (event:any) => setPassword(event.target.value);
@@ -20,9 +21,7 @@ const Signup = () =>{
     const formSubmitHandler =useCallback( async (e:any) =>{
         e.preventDefault();
         const userDetails:{name:string, email:string,password:string} = {
-            name:name,
-            email:email,
-            password:password,
+            name, email,password
         }
         if(password !== confirmPassword){
             setErrorMessage("Passwords do not match");

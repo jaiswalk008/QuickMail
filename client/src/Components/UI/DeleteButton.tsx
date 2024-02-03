@@ -8,7 +8,7 @@ const DeleteButton = (props:{id:string }) =>{
     const deleteHandler = useCallback( async (id:string) =>{
         dispatch(emailActions.deleteEmail(id));
         try{
-            await axios.delete('http://localhost:4000/delete-email/'+id);
+            await axios.delete('http://localhost:4000/mail/'+id);
         }
         catch(err){console.log(err)}
     },[dispatch])

@@ -1,8 +1,8 @@
-import './Mail.css';
-import Compose from './Compose';
 import { NavLink } from 'react-router-dom/';
 import {createPortal} from 'react-dom';
 import { useSelector } from 'react-redux';
+import Compose from './Compose';
+import './Mail.css';
 const MailMenu = () =>{
     const {unreadEmails} = useSelector((state:any) => state.email);
 

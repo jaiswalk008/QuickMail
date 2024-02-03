@@ -42,15 +42,14 @@ const ComposeModal = () => {
     const emailDetails = {
         reciever:recipentRef.current.value.trim(),
         subject:subjectRef.current.value,
-        bodyHTML:htmlContent,
-        bodyText:text.blocks[0].text
+        bodyHTML:htmlContent
     }
     console.log(emailDetails);
     try {
-        const res = await axios.post('http://localhost:4000/send',emailDetails,{
+        const res = await axios.post('http://localhost:4000/mail',emailDetails,{
           headers:{'Authorization':token}
         });
-        console.log(res);
+        // console.log(res);
         dispatch(emailActions.addToSentEmail(res.data));
         const closeBtn= document.querySelector('.btn-close') as HTMLButtonElement;
         closeBtn.click();

@@ -1,21 +1,26 @@
-import './Inbox.css';
-import axios from 'axios';
-import { useDispatch } from 'react-redux';
-import { emailActions } from '../Context/store';
-import DeleteButton from '../UI/DeleteButton';
 import { useCallback } from 'react';
+import { emailActions } from '../Context/store';
+import { useDispatch } from 'react-redux';
+import DeleteButton from '../UI/DeleteButton';
+import { Email } from '../Context/email';
+import axios from 'axios';
+import DOMPurify from 'dompurify';
+import './Inbox.css';
 const Inbox=(props:any) =>{
+    // console.log(props)
     const dispatch = useDispatch();
+    // const email = props.emails.filter((element:Email) => element._id===props.id)[0]
     
+    const sanitizedHTML = DOMPurify.sanitize(props.bodyHTML);
+
     const emailClickHandler = useCallback(async (id:string) =>{
         props.onEmailClickHandler(id);   
 
         if(!props.isRead){
-           
             
             try {
                 dispatch(emailActions.markEmailAsRead(id));
-                await axios.get('http://localhost:4000/markread/'+id);
+                await axios.put('http://localhost:4000/mail/'+id);
             } catch (error) {
                 console.log(error)
             }
@@ -28,9 +33,9 @@ const Inbox=(props:any) =>{
             <span className="sender-name">{senderName}</span>
             <span>
                 <strong className="me-4">{props.subject}</strong>
-                <span className="truncate-text">{props.bodyText}</span>
+                <span className="truncate-text" dangerouslySetInnerHTML={{ __html: sanitizedHTML} }/>
             </span>
-            {props.type==='recieved' && <DeleteButton id={props._id}/>}
+            {props.type==='received' && <DeleteButton id={props._id}/>}
             <hr/>
         </div>
     )
