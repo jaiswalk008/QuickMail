@@ -9,6 +9,6 @@ const email_1 = require("../controllers/email");
 const auth_1 = __importDefault(require("../middleware/auth"));
 router.post('/mail', auth_1.default, email_1.sendEmail);
 router.get('/mail', auth_1.default, email_1.retrieveEmails);
-router.put('/mail/:id', email_1.markEmailAsRead);
-// router.delete('/mail/:id',deleteEmail);
+router.patch('/mail/:id', email_1.markEmailAsRead);
+router.delete('/mail/:id', auth_1.default, email_1.deleteEmail);
 exports.default = router;

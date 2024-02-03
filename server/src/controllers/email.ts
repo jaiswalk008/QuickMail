@@ -21,7 +21,7 @@ export const retrieveEmails = async (req:any,res:any) =>{
     
     try {
         // console.log(req.user.email);
-        const receivedEmails = await Email.find({receiverId:req.user._id.toString()});
+        const receivedEmails = await Email.find({receiverId:req.user._id.toString(),hasReceiverDeleted:false});
         const sendersPromise = receivedEmails.map(async (email) =>{
             const sender = await user.findById({_id:email.senderId});
             return sender;
@@ -33,7 +33,7 @@ export const retrieveEmails = async (req:any,res:any) =>{
 
         console.log('sent emails....')
 
-        const sentEmails = await Email.find({senderId:req.user._id.toString()});
+        const sentEmails = await Email.find({senderId:req.user._id.toString(),hasSenderDeleted:false});
         console.log(sentEmails);
         const receiversPromise = sentEmails.map(async (email) =>{
             const receiver = await user.findById({_id:email.receiverId});
@@ -60,17 +60,21 @@ export const markEmailAsRead = async (req:any , res:any) =>{
     }
 }
 
-// export const deleteEmail = async(req:any,res:any) =>{
-//     const emailId = req.params.id;
-//     // console.log(emailId);
-//     try{
-//         const email = await Email.findById({_id:emailId});
-//         // if(email==='') await Email.findByIdAndDelete({_id:emailId});
-//         else await Email.findByIdAndUpdate({_id:emailId},{reciever:""});
-//         // console.log('email deleted');
-//         res.json({message:'Email deleted successfully'});
-//     }
-//     catch(err){
-//         console.log(err);
-//     }
-// }
+
+export const deleteEmail = async (req: any, res: any) => {
+    const emailId = req.params.id;
+    try {
+      const email = await Email.findById({ _id: emailId });
+      if (email.senderId === req.user._id.toString()) {
+        email.hasReceiverDeleted
+          ? await Email.findByIdAndDelete(email._id)
+          : await Email.findByIdAndUpdate(email._id, { hasSenderDeleted: true });
+      } else {
+        email.hasSenderDeleted
+          ? await Email.findByIdAndDelete(email._id)
+          : await Email.findByIdAndUpdate(email._id, { hasReceiverDeleted: true });
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };

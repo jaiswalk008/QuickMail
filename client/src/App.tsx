@@ -5,11 +5,12 @@ import Login from './Components/User/Login';
 import {Route , Redirect ,Switch} from 'react-router-dom';
 // import Mail from './Components/Mail/Mail';
 import {useSelector} from 'react-redux';
-import Sent from './Components/Mail/Sent';
+
 function App() {
   const {token} = useSelector((state:any) => state.auth);
 
   const Mail = lazy(( )=> import('./Components/Mail/Mail'));
+  const Sent = lazy(( )=> import('./Components/Mail/Sent'));
 
   return (
     <div className="App">

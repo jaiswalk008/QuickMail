@@ -13,9 +13,6 @@ const emailSchema = new Schema({
     bodyHTML: {
         type: String,
     },
-    bodyText: {
-        type: String,
-    },
     senderId: {
         type: String,
         ref: user_1.default,

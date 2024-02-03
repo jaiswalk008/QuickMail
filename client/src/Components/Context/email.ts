@@ -26,8 +26,8 @@ export const emailSlice = createSlice({
             state.receivedEmails = action.payload;
             state.unreadEmails = action.payload.reduce((acc:number  , curr:{isRead:boolean}) =>{
                 return curr.isRead === false ? acc + 1 : acc;
-            },0)
-            // console.log(state.unreadEmails);
+            },0);
+
         },
         setreceivedEmailsClone(state,action){
             state.receivedEmailsClone = action.payload;
@@ -51,13 +51,11 @@ export const emailSlice = createSlice({
             
         },
         deleteEmail(state,action){
-
-            state.receivedEmails = state.receivedEmails.filter((email:Email )=> email._id!==action.payload)
+            if(action.payload.type==='received') state.receivedEmails = state.receivedEmails.filter((email:Email )=> email._id!==action.payload.id)
+            else state.sentEmails = state.sentEmails.filter((email:Email )=> email._id!==action.payload.id)
         
         }
 
     }
 
 })
-
- 

@@ -35,7 +35,7 @@ const Inbox=(props:any) =>{
                 <strong className="me-4">{props.subject}</strong>
                 <span className="truncate-text" dangerouslySetInnerHTML={{ __html: sanitizedHTML} }/>
             </span>
-            {props.type==='received' && <DeleteButton id={props._id}/>}
+            <DeleteButton id={props._id} type={props.type}/>
             <hr/>
         </div>
     )

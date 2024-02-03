@@ -2,14 +2,14 @@ import './Mail.css';
 import MailHeader from "./MailHeader";
 import Inbox from "./Inbox";
 import MailMenu from './MailMenu';
-import {  useState } from 'react';
-import { useSelector } from 'react-redux';
+import {  useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Email } from '../Context/email';
 import InboxMesssage from './InboxMessage';
 import useFetch from '../Hooks/useFetch';
 
 const Mail = () => {
-
+    const dispatch:any = useDispatch();
     const {token} = useSelector((state:any) => state.auth);
     const {receivedEmails} = useSelector((state:any) => state.email);
     const [showInbox , setShowInbox] = useState(true);
@@ -20,7 +20,6 @@ const Mail = () => {
         setShowInbox(prev => !prev);
     }
     useFetch('http://localhost:4000/mail',token);
-
     return (
         <>
            <MailHeader type= "received"/>
